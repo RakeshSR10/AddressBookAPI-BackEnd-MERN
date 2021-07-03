@@ -80,6 +80,22 @@ class AddressBookModel {
         });
         addressBookSchema.save(callback)
     };
+
+    /**
+     * @description login person from the database
+     * @param loginData 
+     * @param callback for service
+     */
+    loginPersonDetails = (loginData, callback) =>{
+        AddressBook.findOne({'email': loginData.email}, (error, data) =>{
+            if(error){
+                return callback(error, null);
+            }else if(!data){
+                return callback("Invalid credentials..! Please re-enter", null);
+            }
+            return callback(null, data);
+        })
+    }
 }
 
 module.exports = new AddressBookModel();

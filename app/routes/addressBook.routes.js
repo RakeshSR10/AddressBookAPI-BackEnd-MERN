@@ -7,4 +7,7 @@ module.exports = (app) => {
     //Creating API for Employee Registration
     app.post('/personRegister', Controller.Registration);
 
+    //Creating API for Employee Registration
+    app.post('/personLogin', Controller.Login);
+
 }
