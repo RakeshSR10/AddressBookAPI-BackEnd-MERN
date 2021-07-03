@@ -11,38 +11,47 @@ const addressBookSchema = mongoose.Schema({
     firstName: {
         type: String,
         required: true,
+        validate: /^[A-Z_]{1}[a-zA-Z_ ]{3,}$/
     },
     lastName: {
         type: String,
         required: true,
+        validate: /^[A-Z_]{1}[a-zA-Z_ ]{3,}$/
     },
     address: {
         type: String,
-        required : true,    
+        required : true,   
+        validate: /^[a-zA-Z]{2,20}$/ 
     },
     city: {
         type: String,
-        required : true,      
+        required : true,   
+        validate: /^[a-zA-Z]{2,20}$/   
     },
     state: {
         type: String,
-        required : true,      
+        required : true,  
+        validate: /^[a-zA-Z]{2,20}$/    
     },
     phone: {
         type: String,
-        required : true,      
+        required : true,  
+        validate: /^[0-9]{1,10}$/    
     },
     email: {
         type: String,
         required: true,
+        validate: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+        unique: true
     },
     zip: {
         type: String,
-        required : true,     
+        required : true, 
+        validate: /^[0-9]{1,6}$/
     },
     password: {
         type: String,
-        required: true
+        required: true,
     }
 },{
     timestamps: true
