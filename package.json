@@ -1,0 +1,23 @@
+{
+  "name": "addressbook-app",
+  "version": "1.0.0",
+  "description": "Address Book Back-End Application using MERN",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Express",
+    "RestAPI",
+    "MongoDB",
+    "Mongoose",
+    "AddressBook"
+  ],
+  "author": "Rakesh S R",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.1"
+  }
+}
