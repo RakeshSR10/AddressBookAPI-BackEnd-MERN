@@ -62,18 +62,22 @@ class addressBookController {
      * @method login
      * @param req,res for service
      */
-     Login = (req, res) => {
+    Login = (req, res) => {
         const loginData = {
             email: req.body.email,
             password : req.body.password
         }
-        addressBookService.loginPersonDetails(loginData, (error, data) => {
-            if(error){
-                return res.status(400).send({success: false, message: error, data: null})
-            }
-            else{
-                return res.status(200).send({success: true, message: "Login successfully", data: data})
-            }
+        addressBookService.loginPersonDetails(loginData, (error, token) => {
+            return((error) ?
+            res.status(400).send({
+                success: false, 
+                message: error
+            }) : 
+            res.send({
+                success: true, 
+                message: "Login Successfully...",
+                token: token
+            }));
         })
     }
 }

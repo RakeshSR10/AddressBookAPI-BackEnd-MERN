@@ -2,8 +2,8 @@ const Joi = require('joi');
 
 //Joi validation for Data
 const validateSchema = Joi.object({
-    firstName: Joi.string().min(3).max(25).pattern(new RegExp('^[A-Z_]{1}[a-zA-Z_ ]{3,}$')).required(),
-    lastName: Joi.string().min(2).max(25).pattern(new RegExp('^[A-Z_]{1}[a-zA-Z_ ]{2,}$')).required(),
+    firstName: Joi.string().min(3).max(17).pattern(new RegExp('[a-zA-Z]{3,20}')).required(),
+    lastName: Joi.string().min(2).max(17).pattern(new RegExp('[a-zA-Z]{2,20}')).required(),
     address: Joi.string().min(2).max(25).pattern(new RegExp('^[a-zA-Z]{2,}')).required(),
     city: Joi.string().min(2).max(20).pattern(new RegExp('^[a-zA-Z]{2,}')).required(),
     state: Joi.string().min(2).max(25).pattern(new RegExp('^[a-zA-Z]{2,}')).required(),

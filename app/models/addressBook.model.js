@@ -6,55 +6,56 @@
  * @since        03/07/2021  
 -----------------------------------------------------------------------------------------------*/
 const mongoose = require('mongoose');
+//Authenticate password using bcrypt
+const bcrypt = require('bcrypt');
 
 const addressBookSchema = mongoose.Schema({
     firstName: {
         type: String,
-        required: true,
-        validate: /^[A-Z_]{1}[a-zA-Z_ ]{3,}$/
+        required: true
     },
     lastName: {
         type: String,
-        required: true,
-        validate: /^[A-Z_]{1}[a-zA-Z_ ]{3,}$/
+        required: true
     },
     address: {
         type: String,
-        required : true,   
-        validate: /^[a-zA-Z]{2,20}$/ 
+        required : true 
     },
     city: {
         type: String,
-        required : true,   
-        validate: /^[a-zA-Z]{2,20}$/   
+        required : true   
     },
     state: {
         type: String,
-        required : true,  
-        validate: /^[a-zA-Z]{2,20}$/    
+        required : true    
     },
     phone: {
         type: String,
-        required : true,  
-        validate: /^[0-9]{1,10}$/    
+        required : true   
     },
     email: {
         type: String,
         required: true,
-        validate: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
         unique: true
     },
     zip: {
         type: String,
-        required : true, 
-        validate: /^[0-9]{1,6}$/
+        required : true
     },
     password: {
         type: String,
-        required: true,
+        required: true
     }
 },{
     timestamps: true
+})
+
+addressBookSchema.pre("save", async function(next){
+    if(this.isModified("password")){
+        this.password = await bcrypt.hash(this.password, 10)
+    }
+    next();
 })
 
 const AddressBook = mongoose.model('AddressBook', addressBookSchema);

@@ -1,4 +1,5 @@
 const addressBookModel = require('../models/addressBook.model.js');
+const helperClass = require('../middleware/addressBook.helper.js');
 
 class AddressBookDataService {
     /**
@@ -21,11 +22,12 @@ class AddressBookDataService {
         addressBookModel.loginPersonDetails(loginData, (error, data) =>{
             if(error){
                 return callback(error, null);
-            } else if(loginData.password === data.password){
-                return (data) ? callback(null, data) : callback(error, null);
+            }else if(helperClass.bcryptDataCheck(loginData.password, data.password)){
+                let token = helperClass.generateToken({loginData});
+                return (token) ? callback(null, token) : callback(error, null);
             }
-            return callback("Please enter your correct password...!", error);
-        })
+            return callback("Please enter your correct password...!", error)
+        });
     }
 }
 //exporting the class to utilize function created in this class
