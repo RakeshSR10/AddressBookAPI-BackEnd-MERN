@@ -1,6 +1,6 @@
 const express = require('express');
 // Configuring the database
-const dbConfig = require('./config/database.config.js');
+require('./config/database.config.js');
 require('dotenv').config();
 
 // create express app
@@ -16,8 +16,11 @@ const port = process.env.PORT
 
 // define a simple route
 app.get('/', (req, res) => {
-    res.json({"message": "Welcome to Address Book MERN"});
+    res.send({"message": "Welcome to Address Book MERN"});
 });
+
+//Require addressBook routes
+require('./app/routes/addressBook.routes.js')(app);
 
 // listen for requests
 app.listen(port, () => {
