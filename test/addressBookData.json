@@ -1,0 +1,207 @@
+{
+    "personLoginPos":{
+        "email": "rakesh@gmail.com",
+        "password": "rakesh@123"
+    },
+
+    "personLoginNeg": {
+        "email": "rakesh@gmail.com",
+        "password": "rakesh@1"
+    },
+
+    "personRegister":{
+        "firstName": "Dileep",
+        "lastName": "Dev",
+        "address": "Hosadurga",
+        "city": "Chitradurga",
+        "state": "Karnataka",
+        "phone": "8527419630",
+        "zip": "456456",
+        "email": "dileep@gmail.com",
+        "password": "dileep@111"
+    },
+
+    "personRegisterNeg": {
+        "firstName": "Dileep",
+        "lastName": "Dev",
+        "address": "Hosadurga",
+        "city": "Chitradurga",
+        "state": "Karnataka",
+        "phone": "8527419630",
+        "zip": "456456",
+        "email": "dileep@gmail.com",
+        "password": "dileep@111"
+    },
+
+    "registerWithoutFirstName": {
+        "firstName": "",
+        "lastName": "Dev",
+        "address": "Hosadurga",
+        "city": "Chitradurga",
+        "state": "Karnataka",
+        "phone": "8527419630",
+        "zip": "456456",
+        "email": "dileep@gmail.com",
+        "password": "dileep@111"
+    },
+
+    "registerWithoutLastName": {
+        "firstName": "Dileep",
+        "lastName": "",
+        "address": "Hosadurga",
+        "city": "Chitradurga",
+        "state": "Karnataka",
+        "phone": "8527419630",
+        "zip": "456456",
+        "email": "dileep@gmail.com",
+        "password": "dileep@111"
+    },
+
+    "registerWithoutEmail": {
+        "firstName": "Dileep",
+        "lastName": "Dev",
+        "address": "Hosadurga",
+        "city": "Chitradurga",
+        "state": "Karnataka",
+        "phone": "8527419630",
+        "zip": "456456",
+        "email": "",
+        "password": "dileep@111"
+    },
+
+    "registerWithoutPassword": {
+        "firstName": "Dilee[",
+        "lastName": "Dev",
+        "address": "Hosadurga",
+        "city": "Chitradurga",
+        "state": "Karnataka",
+        "phone": "8527419630",
+        "zip": "456456",
+        "email": "dileep@gmail.com",
+        "password": ""
+    },
+
+    "registerWithoutAddress": {
+        "firstName": "Dilee[",
+        "lastName": "Dev",
+        "address": "",
+        "city": "Chitradurga",
+        "state": "Karnataka",
+        "phone": "8527419630",
+        "zip": "456456",
+        "email": "dileep@gmail.com",
+        "password": "dileep@111"
+    },
+
+    "registerWithoutCity": {
+        "firstName": "Dilee[",
+        "lastName": "Dev",
+        "address": "Hosadurga",
+        "city": "",
+        "state": "Karnataka",
+        "phone": "8527419630",
+        "zip": "456456",
+        "email": "dileep@gmail.com",
+        "password": "dileep@111"
+    },
+
+    "registerWithoutState": {
+        "firstName": "Dilee[",
+        "lastName": "Dev",
+        "address": "Hosadurga",
+        "city": "Chitradurga",
+        "state": "",
+        "phone": "8527419630",
+        "zip": "456456",
+        "email": "dileep@gmail.com",
+        "password": "dileep@111"
+    },
+
+    "registerWithoutPhone": {
+        "firstName": "Dilee[",
+        "lastName": "Dev",
+        "address": "Hosadurga",
+        "city": "Chitradurga",
+        "state": "Karnataka",
+        "phone": "",
+        "zip": "456456",
+        "email": "dileep@gmail.com",
+        "password": "dileep@111"
+    },
+
+    "registerWithoutZip": {
+        "firstName": "Dileep",
+        "lastName": "Dev",
+        "address": "Hosadurga",
+        "city": "Chitradurga",
+        "state": "Karnataka",
+        "phone": "8527419630",
+        "zip": "",
+        "email": "dileep@gmail.com",
+        "password": "dileep@111"
+    },
+
+    "personContactUpdate": {
+        "firstName": "Santhosh",
+        "lastName": "Anekonda",
+        "address": "Kadlebalu",
+        "city": "Davanagere",
+        "state": "Karnataka",
+        "phone": "9871236654",
+        "zip": "100222",
+        "email": "santhosh@gmail.com",
+        "password": "santhosh@555"
+    },
+
+    "personContactUpdateNeg": {
+        "firstName": "",
+        "lastName": "Anekonda",
+        "address": "Kadlebalu",
+        "city": "Davanagere",
+        "state": "Karnataka",
+        "phone": "9871236654",
+        "zip": "100222",
+        "email": "santhosh@gmail.com",
+        "password": "santhosh@555"
+    },
+
+    "personSingleDataPos" :{
+        "success": true,
+        "message": "Successfully retrieving single person contact details",
+        "data": {
+            "_id": "60e12345743ff526801051ed",
+            "firstName": "Santhosh",
+            "lastName": "Anekonda",
+            "address": "Kadlebalu",
+            "city": "Davanagere",
+            "state": "Karnataka",
+            "phone": "9632587410",
+            "email": "santhosh@gmail.com",
+            "zip": "100200",
+            "password": "$2b$10$WMzMkjS8Q/O108sIO0ZReO.GrYc6bX1OWg895LAcVemoRIeOxrAGO",
+            "createdAt": "2021-07-04T02:56:05.733Z",
+            "updatedAt": "2021-07-04T02:56:05.733Z",
+            "__v": 0
+        }
+    },
+
+    "personDeleteData":{
+        "success": true,
+        "message": "Successfully deleted person contact details",
+        "data": {
+            "_id": "60e12345743ff526801051ed",
+            "firstName": "Santhosh",
+            "lastName": "Anekonda",
+            "address": "Kadlebalu",
+            "city": "Davanagere",
+            "state": "Karnataka",
+            "phone": "9632587410",
+            "email": "santhosh@gmail.com",
+            "zip": "100200",
+            "password": "santhosh@555",
+            "createdAt": "2021-07-04T02:56:05.733Z",
+            "updatedAt": "2021-07-04T04:14:19.076Z",
+            "__v": 0
+        }
+    }
+}
