@@ -4,6 +4,7 @@ require('./config/database.config.js');
 require('dotenv').config();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./app/swagger/swagger.json');
+const logger = require('./logger/logger.js');
 
 // create express app
 const app = express();
@@ -32,7 +33,7 @@ require('./app/routes/addressBook.routes.js')(app);
 
 // listen for requests
 app.listen(port, () => {
-    console.log("Server is listening on port 4000");
+    logger.log('info', `Server is listening on port ${port}`);
 });
 
 module.exports = app;
