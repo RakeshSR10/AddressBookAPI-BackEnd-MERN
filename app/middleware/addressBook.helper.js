@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 class HelperClass {
     /**
      * @description function is return to generate a token when there is a valid user
-     * @param valid loginEmployeeData is expected
+     * @param valid loginData is expected
      * @returns 
      */
     generateToken = (loginData) => {

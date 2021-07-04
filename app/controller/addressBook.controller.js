@@ -7,7 +7,7 @@
  ------------------------------------------------------------------------------*/
 
 //declared a constant variable to assign a imported class from services
-const addressBookService = require('../service/service')
+const addressBookService = require('../service/service.js')
 const validateSchema = require('../middleware/addressBook.validation.js')
 
 //create class to write function
