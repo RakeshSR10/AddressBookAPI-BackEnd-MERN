@@ -77,7 +77,6 @@ class AddressBookModel {
             email: contact.email,
             zip: contact.zip,
             password: contact.password
-
         });
         addressBookSchema.save(callback)
     };
@@ -95,6 +94,72 @@ class AddressBookModel {
                 return callback("Invalid credentials..! Please re-enter", null);
             }
             return callback(null, data);
+        })
+    }
+
+    /**
+     * @description find all person contacts from the database
+     * @method find()
+     * @param callBack for service
+     */
+    findAll = (callback) => {
+        AddressBook.find({}, (error, data) => {
+            if(error) {
+                return callback(error, null);
+            } else {
+                return callback(null, data);
+            }
+        })
+    }
+
+    /**
+     * @description find person by id from the database
+     * @param findOne
+     * @param callback for service
+    */
+    findOne = (contact, callback) => {
+        AddressBook.findById({'_id': contact._id}, (error, data) => {
+            if(error){
+                return callback(error, null)
+            }else {
+                 return callback(null, data)
+            }
+        })
+    }
+
+    /**
+     * @description find person by id and update in the database
+     * @param updateById
+     * @param callback for service
+    */
+    updateById = (_id, contact, callback) => {
+        AddressBook.findByIdAndUpdate({'_id': contact._id}, {
+            firstName: contact.firstName,
+            lastName: contact.lastName,
+            address: contact.address,
+            city: contact.city,
+            state: contact.state,
+            phone: contact.phone,
+            email: contact.email,
+            zip: contact.zip,
+            password: contact.password
+        }, {new : true}, (error, data) => {
+            return((error) ? (callback(error, null)) : (callback(null, data)));
+        });
+    }
+
+    /**
+     * @description find person by id and delete in the database
+     * @param deleteById
+     * @param callback for service
+     */
+    deleteById = (contact, callback) => {
+        AddressBook.findByIdAndRemove(contact._id, (error, data) => {
+            if(error){
+                return callback(error, null)
+            }else{
+                return callback(null, data)
+            }   
         })
     }
 }
