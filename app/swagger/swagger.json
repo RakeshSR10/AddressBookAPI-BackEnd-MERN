@@ -1,0 +1,289 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Address Book Back-End app",
+      "description": "Address Book Application API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:4000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Person Contacts",
+        "description": "API for Person Contact in the system"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/personRegister": {
+        "post": {
+          "tags": [
+            "Register"
+          ],
+          "description": "Create new person contact in system",
+          "parameters": [
+            {
+              "name": "Register",
+              "in": "body",
+              "description": "Person contact that we want to create",
+              "schema": {
+                "$ref": "#/definitions/register"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "schema": {
+            "$ref": "#/definitions/register"
+          },
+          "responses": {
+            "200": {
+              "description": "New Person contact is added"
+            },
+            "400":{
+              "description":"Bad request"
+            }
+          }
+        }
+      },
+      "/personLogin": {
+        "post": {
+          "tags": [
+            "login"
+          ],
+          "description": "login Person in system",
+          "parameters": [
+            {
+              "name": "Login",
+              "in": "body",
+              "description": "Person contact that we want to login",
+              "schema": {
+                "$ref": "#/definitions/login"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "schema": {
+            "$ref": "#/definitions/login"
+          },
+          "responses": {
+            "200": {
+              "description": "New login"   
+            },
+            "400":{
+              "description":"Bad request"
+            }
+          },
+          "security":[
+            {
+              "JWT":[]
+            }
+          ]
+        }
+      },
+      "/contacts": {
+        "get": {
+          "tags": ["contacts"],
+          "description": "retrieve all person contact data from system",
+          "parameters": [],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"    
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+    
+            "404": {
+              "description": "Not found"
+            },
+            "401": {
+              "description": "Authorization error"
+            }
+          },
+          "security": [{
+              "JWT": []
+          }]
+        }
+      },
+  
+      "/contacts/:{_id}": {
+        "get": {
+          "tags": [
+            "readById"
+          ],
+          "description": "retrieve person contact details by id from system",
+          "parameters": [
+            {
+              "name": ":_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"    
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "404": {
+              "description": "Not found"
+            }
+          },
+          "security":[{
+            "JWT" :[]
+          }]
+        }
+      },
+      "/update/:{_id}": {
+        "put": {
+          "tags": [
+            "updateById"
+          ],
+          "description": "update existing person contact details by id from system",
+          "parameters": [
+            {
+              "name": ":_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "Updated Person Contact Details",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/register"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"    
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "404": {
+              "description": "Not found"
+            }
+          },
+          "security":[{
+            "JWT" :[]
+          }]
+        }
+      },
+      "/delete/:{_id}": {
+        "delete": {
+          "tags": [
+            "deleteById"
+          ],
+          "description": "delete person contact details by id from system",
+          "parameters": [
+            {
+              "name": ":_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"    
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+    
+            "404": {
+              "description": "Not found"
+            }
+          },
+          "security":[{
+            "JWT" :[]
+          }]
+        }
+      }
+    },
+    "definitions": {
+      "register": {
+        "type": "object",
+        "properties": {
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+                "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "zip": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+        }
+      },
+      "login": {
+        "type": "object",
+        "properties": {
+          "email" : {
+            "type" :"string"
+          },
+        "password": {
+          "type": "string"
+          }
+        }
+      }
+    },
+    "securityDefinitions":{
+      "JWT":{
+        "type":"apiKey",
+        "name":"token",
+        "in":"header"
+      }
+    }
+  }
