@@ -7,7 +7,7 @@ class AddressBookService {
      * @method createAddDetails to save the person contact
      * @param callback callback for controller
      */
-     addPersonDetails = (contact, callback) => {
+     addPersonDetails = async (contact, callback) => {
         userModel.addPersonDetails(contact, (error, data) =>{
             return error ? callback(error, null) : callback(null, data);
         });
@@ -18,7 +18,7 @@ class AddressBookService {
      * @method loginPersonDetails
      * @param callback callback for controller
     */
-    loginPersonDetails = (loginData, callback) => {
+    loginPersonDetails = async (loginData, callback) => {
         userModel.loginPersonDetails(loginData, (error, data) =>{
             if(error){
                 return callback(error, null);

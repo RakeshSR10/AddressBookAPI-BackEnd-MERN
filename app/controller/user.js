@@ -1,6 +1,7 @@
 //declared a constant variable to assign a imported class from services
 const Service = require('../service/user.js')
 const validateSchema = require('../middleware/userValidation.js')
+const logger = require('../../logger/logger.js');
 
 //create class to write function
 //controller will handling the Register and Login operations
@@ -55,16 +56,30 @@ class AddressBookController {
             password : req.body.password
         }
         Service.loginPersonDetails(loginData, (error, token) => {
-            return((error) ?
-            res.status(400).send({
-                success: false, 
-                message: error
-            }) : 
-            res.send({
-                success: true, 
-                message: "Login Successfully...",
-                token: token
-            }));
+            if (error){
+                logger.error('Invalid Credentials')
+                return res.status(400).send({
+                    success: false, 
+                    message: error
+                })
+            } else {
+                res.send({
+                    success: true,
+                    message: 'Login Successfully...',
+                    token: token
+                })
+            }
+            // return((error) ?
+            // res.status(400).send({
+            //     success: false, 
+            //     message: error
+            // }) : 
+            // res.send({
+            //     success: true, 
+            //     message: "Login Successfully...",
+            //     token: token
+            // })
+            // );
         })
     }
 }

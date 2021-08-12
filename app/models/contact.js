@@ -73,14 +73,27 @@ class ContactModel {
      * @method find()
      * @param callBack for service
      */
-    findAll = (callback) => {
-        Contact.find({}, (error, data) => {
-            if(error) {
-                return callback(error, null);
-            } else {
-                return callback(null, data);
-            }
-        })
+    findAll = () => {
+        try{
+            return Contact.find().then((data) => {
+                if(data){
+                    return data;
+                } else {
+                    return null;
+                }
+            }).catch((error) => {
+                return error;
+            })
+        } catch (error){
+            return error;
+        }
+        // Contact.find({}, (error, data) => {
+        //     if(error) {
+        //         return callback(error, null);
+        //     } else {
+        //         return callback(null, data);
+        //     }
+        // })
     }
 
     /**
@@ -88,14 +101,13 @@ class ContactModel {
      * @param findOne
      * @param callback for service
     */
-    findOne = (contact, callback) => {
-        Contact.findById({'_id': contact._id}, (error, data) => {
-            if(error){
-                return callback(error, null)
-            }else {
-                 return callback(null, data)
-            }
-        })
+    findOne = async (contact) => {
+        try{
+            const singlePerson = await Contact.findById({'_id': contact._id});
+            return singlePerson;
+        } catch(error) {
+            return error;
+        }  
     }
 
     /**

@@ -1,4 +1,5 @@
-const addressBookModel = require('../models/contact.js');
+const ContactModel = require('../models/contact.js');
+const logger = require('../../logger/logger.js')
 
 class ContactService {
     /**
@@ -7,9 +8,19 @@ class ContactService {
      * @param callback callback for controller
      */
      addPersonDetails = (contact, callback) => {
-        addressBookModel.addPersonDetails(contact, (error, data) =>{
-            return error ? callback(error, null) : callback(null, data);
-        });
+        try{
+            ContactModel.addPersonDetails(contact, (error, data) =>{
+                if(error) {
+                    logger.error('Contact create service --', error);
+                    return callback(error, null);
+                }
+                logger.info('Contact create service --', data);
+                return callback(null, data);
+                // return error ? callback(error, null) : callback(null, data);
+            });
+        } catch (error) {
+            callback(error || 'Some error occurred...!', null);
+        }
     }
     
     /**
@@ -17,10 +28,23 @@ class ContactService {
      * @method getAllPersonContacts
      * @param callback, callback for controller 
      */
-    getAllPersonContacts = (callback) => {
-        addressBookModel.findAll((error, data) => {
-            return (error) ? callback(error, null) : callback(null, data);
-        })
+    getAllPersonContacts = () => {
+        try{
+            return ContactModel.findAll().then((data) =>{
+                if(data){
+                    return data;
+                } else{
+                    return null;
+                }
+            }).catch((err) => {
+                return err;
+            })
+        } catch (err){
+            return err;
+        }
+        // ContactModel.findAll((error, data) => {
+        //     return (error) ? callback(error, null) : callback(null, data);
+        // })
     }
 
     /**
@@ -28,10 +52,16 @@ class ContactService {
      * @param  personContactInfo 
      * @param  callBack 
     */
-    getPersonDetailsById = (contact, callback) => {
-        addressBookModel.findOne(contact, (error, data) => {
-            return (error) ? callback(error, null) : callback(null, data);
-        });
+    getPersonDetailsById = async (contact) => {
+        try{
+            let data = await ContactModel.findOne(contact);
+            return data;
+        } catch (error) {
+            return error;
+        }
+        // ContactModel.findOne(contact, (error, data) => {
+        //     return (error) ? callback(error, null) : callback(null, data);
+        // });
     }
 
     /**
@@ -40,9 +70,17 @@ class ContactService {
      * @param callback callback for controller
     */
     updatePersonDetailsById = (contactId, contact, callback) => {
-        addressBookModel.updateById(contactId, contact, (error, data) => {
-            return (error) ? callback(error, null) : callback(null, data)
-        })
+        try {
+            ContactModel.updateById(contactId, contact, (error, data) => {
+                logger.info('Service data -->', data);
+                return err ? callback(err, null) : callback(null, data);
+            });
+        } catch (error) {
+            callback(error || 'Some error occurred..!', null);
+        }
+        // ContactModel.updateById(contactId, contact, (error, data) => {
+        //     return (error) ? callback(error, null) : callback(null, data)
+        // })
     }
 
     /**
@@ -51,7 +89,7 @@ class ContactService {
      * @param callback callback for controller
     */
     deletePersonDetailsById = (contact, callback) => {
-        addressBookModel.deleteById(contact, (error, data) => {
+        ContactModel.deleteById(contact, (error, data) => {
             return (error) ? callback(error, null) : callback(null, data)
         })
     }
