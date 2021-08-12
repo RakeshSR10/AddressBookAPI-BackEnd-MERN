@@ -1,15 +1,13 @@
 /**
  * @module       AddressBook
  * @file         addressBook.models.js
- * @description  addressBookSchema holds the database Schema 
+ * @description  contactSchema holds the database Schema 
  * @author       Rakesh S R <rakeshsrking@gmail.com>
  * @since        03/07/2021  
 -----------------------------------------------------------------------------------------------*/
 const mongoose = require('mongoose');
-//Authenticate password using bcrypt
-const bcrypt = require('bcrypt');
 
-const addressBookSchema = mongoose.Schema({
+const contactSchema = mongoose.Schema({
     firstName: {
         type: String,
         required: true
@@ -42,32 +40,21 @@ const addressBookSchema = mongoose.Schema({
     zip: {
         type: String,
         required : true
-    },
-    password: {
-        type: String,
-        required: true
     }
 },{
     timestamps: true
 })
 
-addressBookSchema.pre("save", async function(next){
-    if(this.isModified("password")){
-        this.password = await bcrypt.hash(this.password, 10)
-    }
-    next();
-})
+const Contact = mongoose.model('Contact', contactSchema);
 
-const AddressBook = mongoose.model('AddressBook', addressBookSchema);
-
-class AddressBookModel {
+class ContactModel {
     /**
      * @description add person in the database
      * @param contact
      * @param callback
      */
     addPersonDetails = (contact, callback) => {
-        const addressBookSchema = new AddressBook({
+        const contactSchema = new Contact({
             firstName: contact.firstName,
             lastName: contact.lastName,
             address: contact.address,
@@ -78,24 +65,8 @@ class AddressBookModel {
             zip: contact.zip,
             password: contact.password
         });
-        addressBookSchema.save(callback)
+        contactSchema.save(callback)
     };
-
-    /**
-     * @description login person from the database
-     * @param loginData 
-     * @param callback for service
-     */
-    loginPersonDetails = (loginData, callback) =>{
-        AddressBook.findOne({'email': loginData.email}, (error, data) =>{
-            if(error){
-                return callback(error, null);
-            }else if(!data){
-                return callback("Invalid credentials..! Please re-enter", null);
-            }
-            return callback(null, data);
-        })
-    }
 
     /**
      * @description find all person contacts from the database
@@ -103,7 +74,7 @@ class AddressBookModel {
      * @param callBack for service
      */
     findAll = (callback) => {
-        AddressBook.find({}, (error, data) => {
+        Contact.find({}, (error, data) => {
             if(error) {
                 return callback(error, null);
             } else {
@@ -118,7 +89,7 @@ class AddressBookModel {
      * @param callback for service
     */
     findOne = (contact, callback) => {
-        AddressBook.findById({'_id': contact._id}, (error, data) => {
+        Contact.findById({'_id': contact._id}, (error, data) => {
             if(error){
                 return callback(error, null)
             }else {
@@ -133,7 +104,7 @@ class AddressBookModel {
      * @param callback for service
     */
     updateById = (_id, contact, callback) => {
-        AddressBook.findByIdAndUpdate({'_id': contact._id}, {
+        Contact.findByIdAndUpdate({'_id': contact._id}, {
             firstName: contact.firstName,
             lastName: contact.lastName,
             address: contact.address,
@@ -154,7 +125,7 @@ class AddressBookModel {
      * @param callback for service
      */
     deleteById = (contact, callback) => {
-        AddressBook.findByIdAndRemove(contact._id, (error, data) => {
+        Contact.findByIdAndRemove(contact._id, (error, data) => {
             if(error){
                 return callback(error, null)
             }else{
@@ -164,4 +135,4 @@ class AddressBookModel {
     }
 }
 
-module.exports = new AddressBookModel();
+module.exports = new ContactModel();

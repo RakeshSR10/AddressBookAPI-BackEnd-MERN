@@ -1,7 +1,6 @@
-const addressBookModel = require('../models/addressBook.model.js');
-const helperClass = require('../middleware/addressBook.helper.js');
+const addressBookModel = require('../models/contact.js');
 
-class AddressBookDataService {
+class ContactService {
     /**
      * @description Create and save person contact then send response to controller
      * @method createAddDetails to save the person contact
@@ -12,24 +11,7 @@ class AddressBookDataService {
             return error ? callback(error, null) : callback(null, data);
         });
     }
-
-    /**
-     * @description sends the info to loginApi in the controller
-     * @method loginPersonDetails
-     * @param callback callback for controller
-    */
-    loginPersonDetails = (loginData, callback) => {
-        addressBookModel.loginPersonDetails(loginData, (error, data) =>{
-            if(error){
-                return callback(error, null);
-            }else if(helperClass.bcryptDataCheck(loginData.password, data.password)){
-                let token = helperClass.generateToken({loginData});
-                return (token) ? callback(null, token) : callback(error, null);
-            }
-            return callback("Please enter your correct password...!", error)
-        });
-    }
-
+    
     /**
      * @description send person contact Information to read in the controller
      * @method getAllPersonContacts
@@ -75,4 +57,4 @@ class AddressBookDataService {
     }
 }
 //exporting the class to utilize function created in this class
-module.exports = new AddressBookDataService();
+module.exports = new ContactService();

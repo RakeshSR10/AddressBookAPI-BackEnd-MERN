@@ -11,7 +11,7 @@ class HelperClass {
      */
     generateToken = (loginData) => {
         return jwt.sign(loginData, process.env.PRIVATE_TOKEN, {
-            expiresIn: '4000s'
+            expiresIn: '5000s'
         });
     }
 

@@ -7,18 +7,18 @@
  ------------------------------------------------------------------------------*/
 
 //declared a constant variable to assign a imported class from services
-const addressBookService = require('../service/service.js')
-const validateSchema = require('../middleware/addressBook.validation.js')
+const ContactService = require('../service/contact.js')
+const validateSchema = require('../middleware/contactValidation.js')
 
 //create class to write function
 //controller will handling the Register and Login operations
-class addressBookController {
+class ContactController {
     /**
      * @description Create and save addressBook and sending response to service
      * @method Registration API to save the addressBook
      * @param req,res for service
      */
-     Registration = (req, res) => {
+     create = (req, res) => {
         // Validate request
         const validation = validateSchema.validate(req.body)
         if(validation.error){
@@ -35,11 +35,10 @@ class addressBookController {
             state: req.body.state,
             phone: req.body.phone,
             email: req.body.email,
-            zip: req.body.zip,
-            password: req.body.password
+            zip: req.body.zip
         }
 
-        addressBookService.addPersonDetails(contact, (error, data) =>{
+        ContactService.addPersonDetails(contact, (error, data) =>{
             if(error){
                 return res.status(400)
                 .send({
@@ -58,35 +57,12 @@ class addressBookController {
     }
 
     /**
-     * @description retrieving login info from user by email and password
-     * @method login
-     * @param req,res for service
-     */
-    Login = (req, res) => {
-        const loginData = {
-            email: req.body.email,
-            password : req.body.password
-        }
-        addressBookService.loginPersonDetails(loginData, (error, token) => {
-            return((error) ?
-            res.status(400).send({
-                success: false, 
-                message: error
-            }) : 
-            res.send({
-                success: true, 
-                message: "Login Successfully...",
-                token: token
-            }));
-        })
-    }
-    /**
      * @description retrieve all person contacts data in this function
-     * @param req, res, for addressBookService
+     * @param req, res, for ContactService
      * @method getAllContacts
      */
     getAllContacts = (req, res) =>{
-        addressBookService.getAllPersonContacts((error, data) => {
+        ContactService.getAllPersonContacts((error, data) => {
             if(error) {
                 return res.status(400)
                        .send({
@@ -110,7 +86,7 @@ class addressBookController {
       */
     getPersonById = (req, res) => {
         let contactId = req.params
-        addressBookService.getPersonDetailsById(contactId, (error, data) => {
+        ContactService.getPersonDetailsById(contactId, (error, data) => {
             if(error){
                 return res.status(400)
                   .send({
@@ -149,13 +125,12 @@ class addressBookController {
             state: req.body.state,
             phone: req.body.phone,
             email: req.body.email,
-            zip: req.body.zip,
-            password: req.body.password
+            zip: req.body.zip
         } 
 
         var contactId = req.params
 
-        addressBookService.updatePersonDetailsById(contactId, contact,(error, data) => {
+        ContactService.updatePersonDetailsById(contactId, contact,(error, data) => {
             if(error){
                 return res.status(404).
                     send({
@@ -181,7 +156,7 @@ class addressBookController {
     */
     delete = (req, res) => {
         var contact = req.params
-        addressBookService.deletePersonDetailsById(contact, (error, data) => {
+        ContactService.deletePersonDetailsById(contact, (error, data) => {
             if(error){
                 return res.status(404).
                 send({
@@ -201,4 +176,4 @@ class addressBookController {
     }
 }
 
-module.exports = new addressBookController();
+module.exports = new ContactController();
