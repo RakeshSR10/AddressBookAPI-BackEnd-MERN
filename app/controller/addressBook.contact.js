@@ -19,7 +19,7 @@ class ContactController {
      * @method Registration API to save the addressBook
      * @param req,res for service
      */
-     create = (req, res) => {
+     createNewContact = (req, res) => {
         // Validate request
         try{
             const validation = validateSchema.validate(req.body)
@@ -117,7 +117,7 @@ class ContactController {
       * @description get person contact data by using contactId
       * @param req, res
       */
-    getPersonById = async (req, res) => {
+    getContactById = async (req, res) => {
         let contactId = req.params
         try{
             let contact = await ContactService.getPersonDetailsById(contactId, (error, data) => {
@@ -153,7 +153,7 @@ class ContactController {
      * @method update
      * @param req,res for service
     */
-    update = (req, res) => {
+    updateContact = (req, res) => {
         const validation = validateSchema.validate(req.body)
         if(validation.error){
            return res.status(400).send({message: validation.error.details[0].message})
@@ -197,7 +197,7 @@ class ContactController {
      * @method delete
      * @param req,res for service
     */
-    delete = (req, res) => {
+    deleteContact = (req, res) => {
         try {
                 var contact = req.params
                 ContactService.deletePersonDetailsById(contact, (error, data) => {

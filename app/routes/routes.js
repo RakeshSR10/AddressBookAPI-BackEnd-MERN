@@ -13,18 +13,18 @@ module.exports = (app) => {
     app.post('/login', userController.Login);
 
     //Create new addressBook
-    app.post('/addNew', tokenCheck.tokenDataChecker, contactController.create);
+    app.post('/addContact', tokenCheck.tokenDataChecker, contactController.createNewContact);
 
     //API for retrieve all contact details of persons from addressBook database
-    app.get('/contacts', tokenCheck.tokenDataChecker, contactController.getAllContacts);
+    app.get('/getAllContacts', tokenCheck.tokenDataChecker, contactController.getAllContacts);
 
     //API for retrieve single person contact data
-    app.get('/contacts/:_id', tokenCheck.tokenDataChecker, contactController.getPersonById);
+    app.get('/getContact/:_id', tokenCheck.tokenDataChecker, contactController.getContactById);
 
     //API for update person contact details using Id
-    app.put('/update/:_id', tokenCheck.tokenDataChecker, contactController.update);
+    app.put('/updateContact/:_id', tokenCheck.tokenDataChecker, contactController.updateContact);
 
     //API for delete person contact details from database using Id
-    app.delete('/delete/:_id', tokenCheck.tokenDataChecker, contactController.delete);
+    app.delete('/deleteContact/:_id', tokenCheck.tokenDataChecker, contactController.deleteContact);
 
 }

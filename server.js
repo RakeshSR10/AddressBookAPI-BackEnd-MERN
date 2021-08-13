@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 });
 
 //Require addressBook routes
-require('./app/routes/addressBook.routes.js')(app);
+require('./app/routes/routes.js')(app);
 
 // listen for requests
 app.listen(port, () => {
