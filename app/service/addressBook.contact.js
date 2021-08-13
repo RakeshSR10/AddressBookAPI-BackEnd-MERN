@@ -1,4 +1,4 @@
-const ContactModel = require('../models/contact.js');
+const ContactModel = require('../models/addressBook.contact.js');
 const logger = require('../../logger/logger.js')
 
 class ContactService {

@@ -1,6 +1,6 @@
 //importing controller to access functionality 
 const userController = require('../controller/user.js');
-const contactController = require('../controller/contact.js');
+const contactController = require('../controller/addressBook.contact.js');
 const tokenCheck = require('../middleware/helper.js');
 
 //routes are used for handling http patterns

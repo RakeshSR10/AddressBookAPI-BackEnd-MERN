@@ -7,7 +7,7 @@
  ------------------------------------------------------------------------------*/
 
 //declared a constant variable to assign a imported class from services
-const ContactService = require('../service/contact.js')
+const ContactService = require('../service/addressBook.contact.js')
 const validateSchema = require('../middleware/contactValidation.js');
 const logger = require('../../logger/logger.js');
 
